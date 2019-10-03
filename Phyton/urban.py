@@ -6,8 +6,8 @@
 # Linked to :                  
 #                                
 # Updated by: Urban Björken
-# Update    : count correct answer
-# Date      : 2018-10-02
+# Update    : added logging
+# Date      : 2019-10-03
 #                        
 # Created by: Urban Björkén
 # Date      : 2018-10-02
@@ -26,7 +26,7 @@ correctAnswer = 0
 totalNumbers = 0
 
 # ******************************************
-# import classes
+# import
 # ******************************************
 import urbanClasses
 import logging

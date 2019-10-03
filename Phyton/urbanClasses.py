@@ -6,9 +6,9 @@
 # Linked to : urban.py                 
 #                                
 # Updated by: Urban Björkén
-# Update    : result()
-#             return True if correct answer else return False
-# Date      : 2018-10-02 
+# Update    : checkInteger()
+#             on error write to logfile
+# Date      : 2019-10-03 
 #                        
 # Created by: Urban Björkén
 # Date      : 2018-10-02
