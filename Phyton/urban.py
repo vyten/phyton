@@ -29,6 +29,12 @@ totalNumbers = 0
 # import classes
 # ******************************************
 import urbanClasses
+import logging
+
+# ******************************************
+# logging
+# ******************************************
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename='PhytonLogExeption.log',level=logging.ERROR)
 
 # ***************************************************************
 # START SCRIPT

@@ -14,6 +14,8 @@
 # Date      : 2018-10-02
 # email     : vyten@starnet.nu
 # ***************************************************************
+import logging
+
 class Calculate:
 	# ******************************************
 	# checkInteger()
@@ -28,10 +30,12 @@ class Calculate:
 			# exit script if it's first choice
 			# ******************************************
 			if cIv == 'firstChoice':
+				logging.error('class: Calculate.checkInteger ' + str(eDesc))
 				print ("Det måste vara heltal\nFel: [", eDesc, "]\n")
 				print("Script avslutat")
 				exit(0)
 			else:
+				logging.error('class: Calculate.checkInteger ' + str(eDesc))
 				print ("Det måste vara heltal")
 		else:
 			return cIi
