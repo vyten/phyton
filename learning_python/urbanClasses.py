@@ -11,6 +11,7 @@
 
 # ** Imports ***************************************************
 import logging
+import sys
 
 # ** Variables *************************************************
 
@@ -28,7 +29,7 @@ class Calculate:
 				logging.error('class: Calculate.checkInteger ' + str(eDesc))
 				print ("Det måste vara heltal\nFel: [", eDesc, "]\n")
 				print("Script avslutat")
-				exit(0)
+				sys.exit(1)
 			else:
 				logging.error('class: Calculate.checkInteger ' + str(eDesc))
 				print ("Det måste vara heltal")
@@ -43,7 +44,7 @@ class Calculate:
 		# calling class Validate
 		userCountInput=Calculate.checkInteger(input('svar: '),'xxx')
 		if userCountInput == result:
-			print ("ratt\n")
+			print ("rätt\n")
 			return True
 		else:
 			print ("fel, rätt svar är:",result ,"\n")
@@ -61,5 +62,6 @@ class Calculate:
 # 1.0 2018-10-02 Initial version
 # 1.1 2019-10-03 checkInteger() on error write to logfile
 # 1.2 2026-10-12 New header template, converted to UTF-8
+# 1.3 2026-10-12 Fixed typo, sys.exit(1) on error
 
 # ** END SCRIPT ************************************************
