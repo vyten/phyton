@@ -1,78 +1,59 @@
-#!/usr/bin/python3.6m
-# coding: latin-1
-# ***************************************************************
+#!/usr/bin/env python3
+# **************************************************************
 # File      : urban.py
 # Purpose   : learning python
-# Linked to :                  
-#                                
-# Updated by: Urban Björken
-# Update    : added logging
-# Date      : 2019-10-03
-#                        
-# Created by: Urban Björkén
+# Linked to : urbanClasses.py
+#
+# Created by: Urban BjÃ¶rkÃ©n
 # Date      : 2018-10-02
 # email     : vyten@starnet.nu
-# ***************************************************************
-# ******************************************
-# clear linux screen
-# ******************************************
-from os import system
-system('clear')
+# **************************************************************
 
-# ******************************************
-# variables (global ?)
-# ******************************************
+# ** Imports ***************************************************
+from os import system
+import logging
+import urbanClasses
+
+# ** Variables *************************************************
 correctAnswer = 0
 totalNumbers = 0
 
-# ******************************************
-# import
-# ******************************************
-import urbanClasses
-import logging
+# ** Functions *************************************************
 
-# ******************************************
+
+# ** Main ******************************************************
+# clear linux screen
+system('clear')
+
 # logging
-# ******************************************
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename='PhytonLogExeption.log',level=logging.ERROR)
 
-# ***************************************************************
-# START SCRIPT
-# ***************************************************************
-# ******************************************
 # welcome
-# ******************************************
-print ("\nHej och Välkommen!")
-print ("Har kan du öva på multiplikationstabellen. Du kommer att få göra följande val:")
+print ("\nHej och VÃ¤lkommen!")
+print ("Har kan du Ã¶va pÃ¥ multiplikationstabellen. Du kommer att fÃ¥ gÃ¶ra fÃ¶ljande val:")
 print ("  * Vilken tabell (ex: 3)\n  * startposition (ex: 3)\n  * slutposition  (ex: 9)\n")
 
-# ******************************************
 # enduser input
-# ******************************************
 selectedTable = urbanClasses.Calculate.checkInteger(input('Skriv in tabell: '),'firstChoice')
 selectedLowerPosition = urbanClasses.Calculate.checkInteger(input('Skriv in start: '),'firstChoice')
 selectedHigherPosition = urbanClasses.Calculate.checkInteger(input('Skriv in stop: '),'firstChoice')
 
-# ******************************************
 # looping out questions
-# ******************************************
 for counter in range (selectedLowerPosition,(selectedHigherPosition+1),1):
-			# ******************************************
-			# calling Count class
-			# ******************************************
-			totalNumbers = urbanClasses.Calculate.counter(totalNumbers)						
-			answer = urbanClasses.Calculate.result(counter,selectedTable)
-			
-			# ******************************************
-			# if correct answer
-			# ******************************************
-			if answer == True:
-				correctAnswer = urbanClasses.Calculate.counter(correctAnswer)	
+	# calling Count class
+	totalNumbers = urbanClasses.Calculate.counter(totalNumbers)
+	answer = urbanClasses.Calculate.result(counter,selectedTable)
 
-# ******************************************
+	# if correct answer
+	if answer == True:
+		correctAnswer = urbanClasses.Calculate.counter(correctAnswer)
+
 # feedback to enduser
-# ******************************************
-print (correctAnswer ,"rätt av totalt" , totalNumbers , "tal")
-# ***************************************************************
-# END SCRIPT
-# ***************************************************************
+print (correctAnswer ,"rÃ¤tt av totalt" , totalNumbers , "tal")
+
+# ** History ***************************************************
+# 1.0 2018-10-02 Initial version
+# 1.1 2019-10-03 Added logging
+# 1.2 2026-10-12 New header template, converted to UTF-8
+
+# ** END SCRIPT ************************************************
