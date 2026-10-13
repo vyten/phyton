@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.7
+# Version   : 1.8
 # Purpose   : learning python
 # Linked to : urban_classes.py
 #
@@ -56,7 +56,7 @@ def main():
 		answer = urban_classes.Calculate.result(counter,selected_table)
 
 		# if correct answer
-		if answer == True:
+		if answer:
 			correct_answer = urban_classes.Calculate.counter(correct_answer)
 
 	# feedback to enduser
@@ -76,5 +76,6 @@ if __name__ == "__main__":
 # 1.5 2026-10-13 snake_case for variable, function and file names
 # 1.6 2026-10-13 logfile saved next to the script, name in variable
 # 1.7 2026-10-13 flow moved to main()
+# 1.8 2026-10-13 if answer: instead of if answer == True:
 
 # ** END SCRIPT ************************************************
