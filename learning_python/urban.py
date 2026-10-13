@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.5
+# Version   : 1.6
 # Purpose   : learning python
 # Linked to : urban_classes.py
 #
@@ -11,7 +11,7 @@
 # **************************************************************
 
 # ** Imports ***************************************************
-from os import system
+from os import system, path
 import sys
 import logging
 import urban_classes
@@ -19,6 +19,8 @@ import urban_classes
 # ** Variables *************************************************
 correct_answer = 0
 total_numbers = 0
+log_file_name = 'PythonLogException.log'
+log_file = path.join(path.dirname(path.abspath(__file__)), log_file_name)
 
 # ** Functions *************************************************
 
@@ -28,7 +30,7 @@ total_numbers = 0
 system('clear')
 
 # logging
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename='PythonLogException.log',level=logging.ERROR)
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=log_file,level=logging.ERROR)
 
 # welcome
 print("\nHej och Välkommen!")
@@ -67,5 +69,6 @@ print(correct_answer ,"rätt av totalt" , total_numbers , "tal")
 # 1.3 2026-10-12 Fixed typos, check that stop is not lower than start
 # 1.4 2026-10-13 renamed logfile, Fixed print (, added version in header
 # 1.5 2026-10-13 snake_case for variable, function and file names
+# 1.6 2026-10-13 logfile saved next to the script, name in variable
 
 # ** END SCRIPT ************************************************
