@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.13
+# Version   : 1.14
 # Purpose   : learning python
 # Linked to : urban_functions.py
 #
@@ -11,7 +11,8 @@
 # **************************************************************
 
 # ** Imports ***************************************************
-from os import system, path
+from os import path
+import subprocess
 import sys
 import logging
 import urban_functions
@@ -27,7 +28,7 @@ def main():
 	total_numbers = 0
 
 	# clear linux screen
-	system('clear')
+	subprocess.run(['clear'])
 
 	# logging
 	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=log_file,level=logging.ERROR)
@@ -81,5 +82,6 @@ if __name__ == "__main__":
 # 1.11 2026-10-13 correct_answer renamed to correct_count
 # 1.12 2026-10-13 calls functions directly, class Calculate removed
 # 1.13 2026-10-13 urban_classes.py renamed to urban_functions.py
+# 1.14 2026-10-13 subprocess.run() instead of os.system()
 
 # ** END SCRIPT ************************************************
