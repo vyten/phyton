@@ -21,6 +21,10 @@ Felaktig inmatning loggas till `PythonLogException.log` i samma katalog som skri
 | `learning_python/urban_functions.py` | Funktionerna `check_integer()` och `result()`: kontroll av heltal och rättning |
 | `template.py` | Mall för header och sektioner i nya skript |
 
+## Fler program
+
+- [DFT – Distans Fart Tid](dft/README.md): räknar ut distans, fart eller tid till sjöss.
+
 ## Utvärdering
 
 Synpunkter från en kodgranskning av skriptet.

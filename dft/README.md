@@ -1,0 +1,35 @@
+# DFT – Distans Fart Tid
+
+Räknar ut distans, fart eller tid till sjöss i terminalen. Du väljer vad du vill räkna ut, skriver in de två andra värdena och får svaret direkt.
+
+Det här är fjärde versionen av programmet. De tidigare är skrivna i VB6, C# (Windows Forms) och PHP (webbsida med TinyMVC).
+
+## Formler
+
+Tiden räknas i minuter, därav 60.
+
+| Räkna ut | Formel | Enhet |
+|---|---|---|
+| Distans | (Fart × Tid) / 60 | M (distansminuter) |
+| Fart | (Distans / Tid) × 60 | knop |
+| Tid | (Distans / Fart) × 60 | h och minuter |
+
+## Kör
+
+```bash
+cd dft
+python3 dft.py
+```
+
+Välj 1 = Distans, 2 = Fart, 3 = Tid eller 0 = Avsluta. Decimaltal kan skrivas med punkt eller komma, till exempel `5.5` eller `5,5`. Ctrl+C avslutar också.
+
+Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ändras i variabeln `log_file_name` i `dft.py`.
+
+## Filer
+
+| Fil | Innehåll |
+|---|---|
+| `dft.py` | Huvudskriptet: meny, inmatning och utskrift |
+| `dft_functions.py` | Uträkningarna: `calculate_distance()`, `calculate_speed()`, `calculate_time()` och hjälpfunktionerna `to_minutes()` och `to_hours_and_minutes()` |
+
+Kör `python3 dft_functions.py` för att se några provuträkningar.

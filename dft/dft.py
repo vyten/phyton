@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.3
+# Version   : 1.4
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -12,10 +12,13 @@
 
 # ** Imports ***************************************************
 import subprocess
+import logging
+from os import path
 import dft_functions
 
 # ** Variables *************************************************
-
+log_file_name = 'dft.log'
+log_file = path.join(path.dirname(path.abspath(__file__)), log_file_name)
 
 # ** Functions *************************************************
 # ask_number() - asks until the user writes a number that is 0 or more, accepts both 2.5 and 2,5
@@ -25,10 +28,12 @@ def ask_number(question):
 		try:
 			number = float(user_input_value)
 		except ValueError:
+			logging.error(f"ask_number: '{user_input_value}' is not a number")
 			print("Det måste vara en siffra, försök igen")
 			continue
 
 		if number < 0:
+			logging.error(f"ask_number: {number} is negative")
 			print("Talet får inte vara negativt, försök igen")
 			continue
 
@@ -47,6 +52,9 @@ def main():
 	# clear linux screen
 	subprocess.run(['clear'])
 
+	# logging
+	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=log_file, level=logging.ERROR)
+
 	print("\nD F T - Distans Fart Tid")
 
 	while True:
@@ -64,6 +72,7 @@ def main():
 			distance = ask_number("Distans, M: ")
 			hours, minutes = ask_time()
 			if dft_functions.to_minutes(hours, minutes) == 0:
+				logging.error("main: speed asked with time 0")
 				print("Tiden får inte vara 0")
 				continue
 			speed = dft_functions.calculate_speed(distance, hours, minutes)
@@ -73,6 +82,7 @@ def main():
 			distance = ask_number("Distans, M: ")
 			speed = ask_number("Fart, knop: ")
 			if speed == 0:
+				logging.error("main: time asked with speed 0")
 				print("Farten får inte vara 0")
 				continue
 			hours, minutes = dft_functions.calculate_time(distance, speed)
@@ -88,13 +98,18 @@ def main():
 
 # ** Main ******************************************************
 # run main() only when the script is started, not when it is imported
+# Ctrl+C or Ctrl+D ends the script quietly instead of showing a Python error
 if __name__ == "__main__":
-	main()
+	try:
+		main()
+	except (KeyboardInterrupt, EOFError):
+		print("\nHej då!")
 
 # ** History ***************************************************
 # 1.0 2026-10-13 Initial version
 # 1.1 2026-10-13 menu, input and output
 # 1.2 2026-10-13 clear screen at start
 # 1.3 2026-10-13 subprocess.run() instead of os.system()
+# 1.4 2026-10-13 logging to dft.log, Ctrl+C and Ctrl+D end the script quietly
 
 # ** END SCRIPT ************************************************
