@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.2
+# Version   : 1.3
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -11,7 +11,7 @@
 # **************************************************************
 
 # ** Imports ***************************************************
-from os import system
+import subprocess
 import dft_functions
 
 # ** Variables *************************************************
@@ -45,7 +45,7 @@ def ask_time():
 # main() - the flow of the script
 def main():
 	# clear linux screen
-	system('clear')
+	subprocess.run(['clear'])
 
 	print("\nD F T - Distans Fart Tid")
 
@@ -95,5 +95,6 @@ if __name__ == "__main__":
 # 1.0 2026-10-13 Initial version
 # 1.1 2026-10-13 menu, input and output
 # 1.2 2026-10-13 clear screen at start
+# 1.3 2026-10-13 subprocess.run() instead of os.system()
 
 # ** END SCRIPT ************************************************

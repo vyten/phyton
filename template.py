@@ -11,7 +11,7 @@
 # **************************************************************
 
 # ** Imports ***************************************************
-from os import system
+import subprocess
 
 # ** Variables *************************************************
 
@@ -21,7 +21,7 @@ from os import system
 
 # ** Main ******************************************************
 # clear linux screen
-system('clear')
+subprocess.run(['clear'])
 
 # ** History ***************************************************
 # 1.0 YYYY-MM-DD Initial version
