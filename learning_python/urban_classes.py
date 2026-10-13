@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
-# File      : urbanClasses.py
-# Version   : 1.4
+# File      : urban_classes.py
+# Version   : 1.5
 # Purpose   : class in external file
 # Linked to : urban.py
 #
@@ -19,20 +19,20 @@ import sys
 
 # ** Functions *************************************************
 class Calculate:
-	# checkInteger() - checks that it is an integer
-	def checkInteger(cIs,cIv):
+	# check_integer() - checks that it is an integer
+	def check_integer(cIs,cIv):
 		try:
 			cIi = int(cIs)
 
-		except (ValueError) as eDesc:
+		except (ValueError) as e_desc:
 			# exit script if it's first choice
 			if cIv == 'firstChoice':
-				logging.error('class: Calculate.checkInteger ' + str(eDesc))
-				print("Det måste vara heltal\nFel: [", eDesc, "]\n")
+				logging.error('class: Calculate.check_integer ' + str(e_desc))
+				print("Det måste vara heltal\nFel: [", e_desc, "]\n")
 				print("Script avslutat")
 				sys.exit(1)
 			else:
-				logging.error('class: Calculate.checkInteger ' + str(eDesc))
+				logging.error('class: Calculate.check_integer ' + str(e_desc))
 				print("Det måste vara heltal")
 		else:
 			return cIi
@@ -43,8 +43,8 @@ class Calculate:
 		print("Vad är:", c, '*', ui,"?")
 
 		# calling class Validate
-		userCountInput=Calculate.checkInteger(input('svar: '),'xxx')
-		if userCountInput == result:
+		user_count_input=Calculate.check_integer(input('svar: '),'xxx')
+		if user_count_input == result:
 			print("rätt\n")
 			return True
 		else:
@@ -65,5 +65,6 @@ class Calculate:
 # 1.2 2026-10-12 New header template, converted to UTF-8
 # 1.3 2026-10-12 Fixed typo, sys.exit(1) on error
 # 1.4 2026-10-13 Fixed print (, added version in header
+# 1.5 2026-10-13 snake_case for variable, function and file names
 
 # ** END SCRIPT ************************************************
