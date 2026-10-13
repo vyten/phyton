@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.11
+# Version   : 1.12
 # Purpose   : learning python
 # Linked to : urban_classes.py
 #
@@ -38,9 +38,9 @@ def main():
 	print("  * Vilken tabell (ex: 3)\n  * startposition (ex: 3)\n  * slutposition  (ex: 9)\n")
 
 	# enduser input
-	selected_table = urban_classes.Calculate.check_integer(input('Skriv in tabell: '), exit_on_error=True)
-	selected_lower_position = urban_classes.Calculate.check_integer(input('Skriv in start: '), exit_on_error=True)
-	selected_higher_position = urban_classes.Calculate.check_integer(input('Skriv in stop: '), exit_on_error=True)
+	selected_table = urban_classes.check_integer(input('Skriv in tabell: '), exit_on_error=True)
+	selected_lower_position = urban_classes.check_integer(input('Skriv in start: '), exit_on_error=True)
+	selected_higher_position = urban_classes.check_integer(input('Skriv in stop: '), exit_on_error=True)
 
 	# stop must not be lower than start
 	if selected_higher_position < selected_lower_position:
@@ -52,7 +52,7 @@ def main():
 	# looping out questions
 	for counter in range(selected_lower_position, selected_higher_position + 1):
 		total_numbers += 1
-		answer = urban_classes.Calculate.result(counter,selected_table)
+		answer = urban_classes.result(counter,selected_table)
 
 		# if correct answer
 		if answer:
@@ -79,5 +79,6 @@ if __name__ == "__main__":
 # 1.9 2026-10-13 x += 1 instead of counter(), removed step in range()
 # 1.10 2026-10-13 exit_on_error=True instead of 'firstChoice'
 # 1.11 2026-10-13 correct_answer renamed to correct_count
+# 1.12 2026-10-13 calls functions directly, class Calculate removed
 
 # ** END SCRIPT ************************************************

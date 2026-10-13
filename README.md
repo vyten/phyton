@@ -18,7 +18,7 @@ Felaktig inmatning loggas till `PythonLogException.log` i samma katalog som skri
 | Fil | Innehåll |
 |---|---|
 | `learning_python/urban.py` | Huvudskriptet: välkomsttext, inmatning, frågeloop och resultat |
-| `learning_python/urban_classes.py` | Klassen `Calculate`: kontroll av heltal och rättning |
+| `learning_python/urban_classes.py` | Funktionerna `check_integer()` och `result()`: kontroll av heltal och rättning |
 | `template.py` | Mall för header och sektioner i nya skript |
 
 ## Utvärdering
