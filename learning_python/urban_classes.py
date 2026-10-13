@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban_classes.py
-# Version   : 1.7
+# Version   : 1.8
 # Purpose   : class in external file
 # Linked to : urban.py
 #
@@ -19,7 +19,7 @@ import sys
 
 # ** Functions *************************************************
 class Calculate:
-	# check_integer() - checks that it is an integer, exits the script on error if exit_on_error is True
+	# check_integer() - returns the integer, or None if it is not an integer (exits the script instead if exit_on_error is True)
 	def check_integer(user_input_value, exit_on_error):
 		try:
 			number = int(user_input_value)
@@ -32,21 +32,22 @@ class Calculate:
 				sys.exit(1)
 			else:
 				print("Det måste vara heltal")
+				return None
 		else:
 			return number
 
 	# result() - calculates and corrects answers from users, printing answers correct | error
 	def result(factor, table):
-		correct_result = factor * table
+		correct_answer = factor * table
 		print("Vad är:", factor, '*', table,"?")
 
 		# check that the answer is an integer
 		answer = Calculate.check_integer(input('svar: '), exit_on_error=False)
-		if answer == correct_result:
+		if answer == correct_answer:
 			print("rätt\n")
 			return True
 		else:
-			print("fel, rätt svar är:", correct_result, "\n")
+			print("fel, rätt svar är:", correct_answer, "\n")
 			return False
 
 # ** Main ******************************************************
@@ -61,5 +62,6 @@ class Calculate:
 # 1.5 2026-10-13 snake_case for variable, function and file names
 # 1.6 2026-10-13 removed counter(), fixed outdated comment
 # 1.7 2026-10-13 readable parameter names, exit_on_error True/False instead of strings
+# 1.8 2026-10-13 check_integer() returns None on error, correct_result renamed to correct_answer
 
 # ** END SCRIPT ************************************************

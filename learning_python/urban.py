@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.10
+# Version   : 1.11
 # Purpose   : learning python
 # Linked to : urban_classes.py
 #
@@ -23,7 +23,7 @@ log_file = path.join(path.dirname(path.abspath(__file__)), log_file_name)
 # ** Functions *************************************************
 # main() - the flow of the script
 def main():
-	correct_answer = 0
+	correct_count = 0
 	total_numbers = 0
 
 	# clear linux screen
@@ -56,10 +56,10 @@ def main():
 
 		# if correct answer
 		if answer:
-			correct_answer += 1
+			correct_count += 1
 
 	# feedback to enduser
-	print(correct_answer ,"rätt av totalt" , total_numbers , "tal")
+	print(correct_count ,"rätt av totalt" , total_numbers , "tal")
 
 # ** Main ******************************************************
 # run main() only when the script is started, not when it is imported
@@ -78,5 +78,6 @@ if __name__ == "__main__":
 # 1.8 2026-10-13 if answer: instead of if answer == True:
 # 1.9 2026-10-13 x += 1 instead of counter(), removed step in range()
 # 1.10 2026-10-13 exit_on_error=True instead of 'firstChoice'
+# 1.11 2026-10-13 correct_answer renamed to correct_count
 
 # ** END SCRIPT ************************************************
