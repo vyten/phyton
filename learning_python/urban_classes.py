@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban_classes.py
-# Version   : 1.6
+# Version   : 1.7
 # Purpose   : class in external file
 # Linked to : urban.py
 #
@@ -19,36 +19,34 @@ import sys
 
 # ** Functions *************************************************
 class Calculate:
-	# check_integer() - checks that it is an integer
-	def check_integer(cIs,cIv):
+	# check_integer() - checks that it is an integer, exits the script on error if exit_on_error is True
+	def check_integer(user_input_value, exit_on_error):
 		try:
-			cIi = int(cIs)
+			number = int(user_input_value)
 
-		except (ValueError) as e_desc:
-			# exit script if it's first choice
-			if cIv == 'firstChoice':
-				logging.error('class: Calculate.check_integer ' + str(e_desc))
-				print("Det måste vara heltal\nFel: [", e_desc, "]\n")
+		except (ValueError) as error:
+			logging.error('class: Calculate.check_integer ' + str(error))
+			if exit_on_error:
+				print("Det måste vara heltal\nFel: [", error, "]\n")
 				print("Script avslutat")
 				sys.exit(1)
 			else:
-				logging.error('class: Calculate.check_integer ' + str(e_desc))
 				print("Det måste vara heltal")
 		else:
-			return cIi
+			return number
 
 	# result() - calculates and corrects answers from users, printing answers correct | error
-	def result(c,ui):
-		result = c * ui
-		print("Vad är:", c, '*', ui,"?")
+	def result(factor, table):
+		correct_result = factor * table
+		print("Vad är:", factor, '*', table,"?")
 
 		# check that the answer is an integer
-		user_count_input=Calculate.check_integer(input('svar: '),'xxx')
-		if user_count_input == result:
+		answer = Calculate.check_integer(input('svar: '), exit_on_error=False)
+		if answer == correct_result:
 			print("rätt\n")
 			return True
 		else:
-			print("fel, rätt svar är:",result ,"\n")
+			print("fel, rätt svar är:", correct_result, "\n")
 			return False
 
 # ** Main ******************************************************
@@ -62,5 +60,6 @@ class Calculate:
 # 1.4 2026-10-13 Fixed print (, added version in header
 # 1.5 2026-10-13 snake_case for variable, function and file names
 # 1.6 2026-10-13 removed counter(), fixed outdated comment
+# 1.7 2026-10-13 readable parameter names, exit_on_error True/False instead of strings
 
 # ** END SCRIPT ************************************************
