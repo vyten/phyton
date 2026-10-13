@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.8
+# Version   : 1.9
 # Purpose   : learning python
 # Linked to : urban_classes.py
 #
@@ -50,14 +50,13 @@ def main():
 		sys.exit(1)
 
 	# looping out questions
-	for counter in range (selected_lower_position,(selected_higher_position+1),1):
-		# calling Count class
-		total_numbers = urban_classes.Calculate.counter(total_numbers)
+	for counter in range(selected_lower_position, selected_higher_position + 1):
+		total_numbers += 1
 		answer = urban_classes.Calculate.result(counter,selected_table)
 
 		# if correct answer
 		if answer:
-			correct_answer = urban_classes.Calculate.counter(correct_answer)
+			correct_answer += 1
 
 	# feedback to enduser
 	print(correct_answer ,"rätt av totalt" , total_numbers , "tal")
@@ -77,5 +76,6 @@ if __name__ == "__main__":
 # 1.6 2026-10-13 logfile saved next to the script, name in variable
 # 1.7 2026-10-13 flow moved to main()
 # 1.8 2026-10-13 if answer: instead of if answer == True:
+# 1.9 2026-10-13 x += 1 instead of counter(), removed step in range()
 
 # ** END SCRIPT ************************************************
