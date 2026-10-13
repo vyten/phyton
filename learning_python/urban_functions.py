@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
-# File      : urban_classes.py
-# Version   : 1.9
+# File      : urban_functions.py
+# Version   : 1.10
 # Purpose   : functions in external file
 # Linked to : urban.py
 #
@@ -24,7 +24,7 @@ def check_integer(user_input_value, exit_on_error):
 		number = int(user_input_value)
 
 	except (ValueError) as error:
-		logging.error('urban_classes.check_integer ' + str(error))
+		logging.error('urban_functions.check_integer ' + str(error))
 		if exit_on_error:
 			print("Det måste vara heltal\nFel: [", error, "]\n")
 			print("Script avslutat")
@@ -64,5 +64,6 @@ def result(factor, table):
 # 1.7 2026-10-13 readable parameter names, exit_on_error True/False instead of strings
 # 1.8 2026-10-13 check_integer() returns None on error, correct_result renamed to correct_answer
 # 1.9 2026-10-13 class Calculate replaced by functions in the module
+# 1.10 2026-10-13 renamed from urban_classes.py
 
 # ** END SCRIPT ************************************************
