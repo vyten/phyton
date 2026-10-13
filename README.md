@@ -11,7 +11,7 @@ cd learning_python
 python3 urban.py
 ```
 
-Felaktig inmatning loggas till `PhytonLogExeption.log` i katalogen där skriptet körs.
+Felaktig inmatning loggas till `PythonLogException.log` i katalogen där skriptet körs.
 
 ## Filer
 
