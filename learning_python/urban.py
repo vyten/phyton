@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
+# Version   : 1.4
 # Purpose   : learning python
 # Linked to : urbanClasses.py
 #
@@ -27,12 +28,12 @@ totalNumbers = 0
 system('clear')
 
 # logging
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename='PhytonLogExeption.log',level=logging.ERROR)
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename='PythonLogException.log',level=logging.ERROR)
 
 # welcome
-print ("\nHej och Välkommen!")
-print ("Här kan du öva på multiplikationstabellen. Du kommer att få göra följande val:")
-print ("  * Vilken tabell (ex: 3)\n  * startposition (ex: 3)\n  * slutposition  (ex: 9)\n")
+print("\nHej och Välkommen!")
+print("Här kan du öva på multiplikationstabellen. Du kommer att få göra följande val:")
+print("  * Vilken tabell (ex: 3)\n  * startposition (ex: 3)\n  * slutposition  (ex: 9)\n")
 
 # enduser input
 selectedTable = urbanClasses.Calculate.checkInteger(input('Skriv in tabell: '),'firstChoice')
@@ -42,7 +43,7 @@ selectedHigherPosition = urbanClasses.Calculate.checkInteger(input('Skriv in sto
 # stop must not be lower than start
 if selectedHigherPosition < selectedLowerPosition:
 	logging.error('urban.py: stop (' + str(selectedHigherPosition) + ') lower than start (' + str(selectedLowerPosition) + ')')
-	print ("Stop får inte vara mindre än start")
+	print("Stop får inte vara mindre än start")
 	print("Script avslutat")
 	sys.exit(1)
 
@@ -57,12 +58,13 @@ for counter in range (selectedLowerPosition,(selectedHigherPosition+1),1):
 		correctAnswer = urbanClasses.Calculate.counter(correctAnswer)
 
 # feedback to enduser
-print (correctAnswer ,"rätt av totalt" , totalNumbers , "tal")
+print(correctAnswer ,"rätt av totalt" , totalNumbers , "tal")
 
 # ** History ***************************************************
 # 1.0 2018-10-02 Initial version
 # 1.1 2019-10-03 Added logging
 # 1.2 2026-10-12 New header template, converted to UTF-8
 # 1.3 2026-10-12 Fixed typos, check that stop is not lower than start
+# 1.4 2026-10-13 renamed logfile, Fixed print (, added version in header
 
 # ** END SCRIPT ************************************************

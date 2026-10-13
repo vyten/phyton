@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urbanClasses.py
+# Version   : 1.4
 # Purpose   : class in external file
 # Linked to : urban.py
 #
@@ -27,27 +28,27 @@ class Calculate:
 			# exit script if it's first choice
 			if cIv == 'firstChoice':
 				logging.error('class: Calculate.checkInteger ' + str(eDesc))
-				print ("Det måste vara heltal\nFel: [", eDesc, "]\n")
+				print("Det måste vara heltal\nFel: [", eDesc, "]\n")
 				print("Script avslutat")
 				sys.exit(1)
 			else:
 				logging.error('class: Calculate.checkInteger ' + str(eDesc))
-				print ("Det måste vara heltal")
+				print("Det måste vara heltal")
 		else:
 			return cIi
 
 	# result() - calculates and corrects answers from users, printing answers correct | error
 	def result(c,ui):
 		result = c * ui
-		print ("Vad är:", c, '*', ui,"?")
+		print("Vad är:", c, '*', ui,"?")
 
 		# calling class Validate
 		userCountInput=Calculate.checkInteger(input('svar: '),'xxx')
 		if userCountInput == result:
-			print ("rätt\n")
+			print("rätt\n")
 			return True
 		else:
-			print ("fel, rätt svar är:",result ,"\n")
+			print("fel, rätt svar är:",result ,"\n")
 			return False
 
 	# counter()
@@ -63,5 +64,6 @@ class Calculate:
 # 1.1 2019-10-03 checkInteger() on error write to logfile
 # 1.2 2026-10-12 New header template, converted to UTF-8
 # 1.3 2026-10-12 Fixed typo, sys.exit(1) on error
+# 1.4 2026-10-13 Fixed print (, added version in header
 
 # ** END SCRIPT ************************************************

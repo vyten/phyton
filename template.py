@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : template.py
+# Version   : 1.0
 # Purpose   : Short description of what the script does
 # Linked to :
 #
