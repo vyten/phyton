@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban_classes.py
-# Version   : 1.5
+# Version   : 1.6
 # Purpose   : class in external file
 # Linked to : urban.py
 #
@@ -42,7 +42,7 @@ class Calculate:
 		result = c * ui
 		print("Vad är:", c, '*', ui,"?")
 
-		# calling class Validate
+		# check that the answer is an integer
 		user_count_input=Calculate.check_integer(input('svar: '),'xxx')
 		if user_count_input == result:
 			print("rätt\n")
@@ -50,11 +50,6 @@ class Calculate:
 		else:
 			print("fel, rätt svar är:",result ,"\n")
 			return False
-
-	# counter()
-	def counter(ci):
-		ci = ci + 1
-		return ci
 
 # ** Main ******************************************************
 
@@ -66,5 +61,6 @@ class Calculate:
 # 1.3 2026-10-12 Fixed typo, sys.exit(1) on error
 # 1.4 2026-10-13 Fixed print (, added version in header
 # 1.5 2026-10-13 snake_case for variable, function and file names
+# 1.6 2026-10-13 removed counter(), fixed outdated comment
 
 # ** END SCRIPT ************************************************
