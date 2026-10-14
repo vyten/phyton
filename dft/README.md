@@ -36,7 +36,7 @@ Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ä
 | `lang_en.py` | Engelska texter |
 | `lang_cz.py` | Tjeckiska texter (rader märkta TODO är fortfarande på svenska) |
 
-Kör `python3 dft_functions.py` för att se några provuträkningar.
+Kör `python3 dft_functions.py` för att testa uträkningarna. Den skriver `All tests OK`, eller stoppar med `AssertionError` och visar vilket svar som är fel.
 
 ## Utvärdering
 
@@ -47,6 +47,7 @@ Synpunkter från en kodgranskning av programmet.
 - **Uträkningarna är skilda från användargränssnittet.** `dft_functions.py` räknar bara och skriver aldrig ut något, och `dft.py` sköter frågor och svar. Därför kan ett GUI senare använda samma funktioner utan ändringar.
 - **Funktionerna är små och gör en sak var.** `to_minutes()` och `to_hours_and_minutes()` används av de andra i stället för att samma uträkning upprepas.
 - **Felet med 60 minuter från C#-versionen är borta.** `divmod(round(...), 60)` ger alltid minuter mellan 0 och 59.
+- **Uträkningarna testar sig själva** med `assert` när `dft_functions.py` körs direkt, så ett fel syns utan att man behöver läsa av svaren.
 
 ### dft.py
 
@@ -63,6 +64,5 @@ Synpunkter från en kodgranskning av programmet.
 ### Att förbättra
 
 - **`terminal_colors.py` finns i två kopior**, här och i `learning_python/`. Ändras den ena måste den andra ändras för hand.
-- **Provuträkningarna i `dft_functions.py` skrivs bara ut** och måste läsas av med ögonen. Med `assert` eller modulen `unittest` kontrollerar Python själv att svaren stämmer.
 - **Distansenheten skiljer sig mellan språken:** `M` på svenska och `nm` på engelska och tjeckiska.
 - **Nio rader i `lang_cz.py` är fortfarande på svenska** och väntar på översättning.

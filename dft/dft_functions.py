@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft_functions.py
-# Version   : 1.3
+# Version   : 1.4
 # Purpose   : functions for calculating distance, speed and time
 # Linked to : dft.py
 #
@@ -11,7 +11,7 @@
 # **************************************************************
 
 # ** Imports ***************************************************
-
+import math
 
 # ** Variables *************************************************
 
@@ -48,23 +48,31 @@ def calculate_time(distance, speed):
 
 # ** Main ******************************************************
 # test the functions, runs only when this file is started directly
+# assert stops with AssertionError if an answer is wrong
+# math.isclose() is used for decimals, since 0.1 + 0.2 is not exactly 0.3 in a computer
 if __name__ == "__main__":
-	print("6 knop i 1 h 30 min:", calculate_distance(6, 1, 30), "M")
-	print("10 knop i 0 h 45 min:", calculate_distance(10, 0, 45), "M")
-	print("5.5 knop i 2 h 0 min:", calculate_distance(5.5, 2, 0), "M")
-	print()
-	print("9 M på 1 h 30 min:", calculate_speed(9, 1, 30), "knop")
-	print("7.5 M på 0 h 45 min:", calculate_speed(7.5, 0, 45), "knop")
-	print("11 M på 2 h 0 min:", calculate_speed(11, 2, 0), "knop")
-	print()
-	for distance, speed in [(9, 6), (7.5, 10), (10, 3), (6, 6), (5.97, 6)]:
-		hours, minutes = calculate_time(distance, speed)
-		print(distance, "M i", speed, "knop:", hours, "h", minutes, "min")
+	# speed, hours, minutes -> distance
+	for speed, hours, minutes, expected in [(6, 1, 30, 9), (10, 0, 45, 7.5), (5.5, 2, 0, 11)]:
+		distance = calculate_distance(speed, hours, minutes)
+		assert math.isclose(distance, expected), f"calculate_distance({speed}, {hours}, {minutes}) gave {distance}, expected {expected}"
+
+	# distance, hours, minutes -> speed
+	for distance, hours, minutes, expected in [(9, 1, 30, 6), (7.5, 0, 45, 10), (11, 2, 0, 5.5)]:
+		speed = calculate_speed(distance, hours, minutes)
+		assert math.isclose(speed, expected), f"calculate_speed({distance}, {hours}, {minutes}) gave {speed}, expected {expected}"
+
+	# distance, speed -> hours and minutes, the last two are the 60 minute bug from the C# version
+	for distance, speed, expected in [(9, 6, (1, 30)), (7.5, 10, (0, 45)), (10, 3, (3, 20)), (6, 6, (1, 0)), (5.97, 6, (1, 0))]:
+		result = calculate_time(distance, speed)
+		assert result == expected, f"calculate_time({distance}, {speed}) gave {result}, expected {expected}"
+
+	print("All tests OK")
 
 # ** History ***************************************************
 # 1.0 2026-10-13 Initial version
 # 1.1 2026-10-13 calculate_distance()
 # 1.2 2026-10-13 calculate_speed(), to_minutes()
 # 1.3 2026-10-13 calculate_time(), to_hours_and_minutes()
+# 1.4 2026-10-14 tests with assert instead of printing
 
 # ** END SCRIPT ************************************************
