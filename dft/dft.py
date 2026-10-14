@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.5
+# Version   : 1.6
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -15,6 +15,7 @@ import subprocess
 import logging
 from os import path
 import dft_functions
+from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_YELLOW, COL_STANDARD
 
 # ** Variables *************************************************
 LOG_FILE_NAME = 'dft.log'
@@ -29,12 +30,12 @@ def ask_number(question):
 			number = float(user_input_value)
 		except ValueError:
 			logging.error(f"ask_number: '{user_input_value}' is not a number")
-			print("Det måste vara en siffra, försök igen")
+			print(f"{COL_YELLOW_RED} Det måste vara en siffra, försök igen {COL_STANDARD}")
 			continue
 
 		if number < 0:
 			logging.error(f"ask_number: {number} is negative")
-			print("Talet får inte vara negativt, försök igen")
+			print(f"{COL_YELLOW_RED} Talet får inte vara negativt, försök igen {COL_STANDARD}")
 			continue
 
 		return number
@@ -55,7 +56,8 @@ def main():
 	# logging
 	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=LOG_FILE, level=logging.ERROR)
 
-	print("\nD F T - Distans Fart Tid")
+	print()
+	print(f"{COL_YELLOW_BLUE}   D F T - Distans Fart Tid   {COL_STANDARD}")
 
 	while True:
 		print("\nVad vill du räkna ut?")
@@ -66,34 +68,34 @@ def main():
 			speed = ask_number("Fart, knop: ")
 			hours, minutes = ask_time()
 			distance = dft_functions.calculate_distance(speed, hours, minutes)
-			print(f"Distansen är: {distance:.1f} M")
+			print(f"{COL_YELLOW}Distansen är: {distance:.1f} M{COL_STANDARD}")
 
 		elif choice == "2":
 			distance = ask_number("Distans, M: ")
 			hours, minutes = ask_time()
 			if dft_functions.to_minutes(hours, minutes) == 0:
 				logging.error("main: speed asked with time 0")
-				print("Tiden får inte vara 0")
+				print(f"{COL_YELLOW_RED} Tiden får inte vara 0 {COL_STANDARD}")
 				continue
 			speed = dft_functions.calculate_speed(distance, hours, minutes)
-			print(f"Farten är: {speed:.1f} knop")
+			print(f"{COL_YELLOW}Farten är: {speed:.1f} knop{COL_STANDARD}")
 
 		elif choice == "3":
 			distance = ask_number("Distans, M: ")
 			speed = ask_number("Fart, knop: ")
 			if speed == 0:
 				logging.error("main: time asked with speed 0")
-				print("Farten får inte vara 0")
+				print(f"{COL_YELLOW_RED} Farten får inte vara 0 {COL_STANDARD}")
 				continue
 			hours, minutes = dft_functions.calculate_time(distance, speed)
-			print(f"Tiden är: {hours} h {minutes} min")
+			print(f"{COL_YELLOW}Tiden är: {hours} h {minutes} min{COL_STANDARD}")
 
 		elif choice == "0":
 			print("Hej då!")
 			break
 
 		else:
-			print("Välj 1, 2, 3 eller 0")
+			print(f"{COL_YELLOW_RED} Välj 1, 2, 3 eller 0 {COL_STANDARD}")
 
 
 # ** Main ******************************************************
@@ -112,5 +114,6 @@ if __name__ == "__main__":
 # 1.3 2026-10-13 subprocess.run() instead of os.system()
 # 1.4 2026-10-13 logging to dft.log, Ctrl+C and Ctrl+D end the script quietly
 # 1.5 2026-10-14 constants in upper case
+# 1.6 2026-10-14 colors (terminal_colors.py)
 
 # ** END SCRIPT ************************************************
