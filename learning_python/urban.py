@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.17
+# Version   : 1.18
 # Purpose   : learning python
 # Linked to : urban_functions.py
 #
@@ -16,7 +16,7 @@ import subprocess
 import sys
 import logging
 import urban_functions
-from terminal_colors import COL_YELLOW_BLUE, COL_STANDARD
+from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_STANDARD
 
 # ** Variables *************************************************
 LOG_FILE_NAME = 'PythonLogException.log'
@@ -59,8 +59,8 @@ def main():
 	# stop must not be lower than start
 	if selected_higher_position < selected_lower_position:
 		logging.error('urban.py: stop (' + str(selected_higher_position) + ') lower than start (' + str(selected_lower_position) + ')')
-		print("Stop får inte vara mindre än start")
-		print("Script avslutat")
+		print(f"{COL_YELLOW_RED} Stop får inte vara mindre än start {COL_STANDARD}")
+		print(f"{COL_YELLOW_RED} Script avslutat {COL_STANDARD}")
 		sys.exit(1)
 
 	# looping out questions
@@ -99,5 +99,6 @@ if __name__ == "__main__":
 # 1.15 2026-10-14 welcome text yellow on blue (terminal_colors.py)
 # 1.16 2026-10-14 descriptive color names
 # 1.17 2026-10-14 constants in upper case
+# 1.18 2026-10-14 wrong input in yellow on red
 
 # ** END SCRIPT ************************************************
