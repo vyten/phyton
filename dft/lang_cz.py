@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : lang_cz.py
-# Version   : 1.1
+# Version   : 1.2
 # Purpose   : Czech texts for dft.py, lines marked TODO are still in Swedish
 # Linked to : dft.py
 #
@@ -24,7 +24,7 @@ TEXTS = {
 	'speed': 'rychlost',
 	'time': 'čas',
 	'quit': 'Avsluta',                                                # TODO översätt
-	'change_language': 'Byt språk',                                   # TODO översätt
+	'change_language': 'Změnit jazyk',
 	'choice': 'Val: ',                                                # TODO översätt
 	'goodbye': 'Hej då!',                                             # TODO översätt
 
@@ -59,5 +59,6 @@ if __name__ == "__main__":
 # ** History ***************************************************
 # 1.0 2026-10-14 Initial version
 # 1.1 2026-10-14 change_language, 4 in error_menu
+# 1.2 2026-10-14 change_language in Czech
 
 # ** END SCRIPT ************************************************
