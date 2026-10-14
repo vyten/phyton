@@ -50,7 +50,7 @@ Synpunkter från en kodgranskning av programmet.
 
 ### dft.py
 
-- **Inmatningen tål både punkt och komma** som decimaltecken, och negativa tal stoppas.
+- **Inmatningen tål både punkt och komma** som decimaltecken, och negativa tal stoppas. `nan` och `inf`, som `float()` också godtar, stoppas med `math.isfinite()`.
 - **Division med noll fångas** innan uträkningen, med ett eget felmeddelande för tid 0 och fart 0.
 - **Ctrl+C och Ctrl+D avslutar lugnt** med hej då på valt språk, i stället för en lång Python-felutskrift.
 - **Språken ligger i en tabell** (`LANGUAGES`). Ett nytt språk kräver bara en ny språkfil och en rad.
@@ -62,7 +62,6 @@ Synpunkter från en kodgranskning av programmet.
 
 ### Att förbättra
 
-- **`nan` och `inf` godtas som tal.** `float()` accepterar dem, så `ask_number()` släpper igenom dem. Fart `nan` vid uträkning av tid kraschar programmet med `ValueError: cannot convert float NaN to integer`, och fart `inf` ger svaret `Distansen är: inf M`. Det går att rätta med `math.isfinite(number)` i `ask_number()`.
 - **`terminal_colors.py` finns i två kopior**, här och i `learning_python/`. Ändras den ena måste den andra ändras för hand.
 - **Provuträkningarna i `dft_functions.py` skrivs bara ut** och måste läsas av med ögonen. Med `assert` eller modulen `unittest` kontrollerar Python själv att svaren stämmer.
 - **Distansenheten skiljer sig mellan språken:** `M` på svenska och `nm` på engelska och tjeckiska.

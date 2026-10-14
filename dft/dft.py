@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.11
+# Version   : 1.12
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -13,6 +13,7 @@
 # ** Imports ***************************************************
 import subprocess
 import logging
+import math
 from os import path
 import dft_functions
 import lang_se
@@ -44,6 +45,12 @@ def ask_number(question, texts):
 			number = float(user_input_value)
 		except ValueError:
 			logging.error(f"ask_number: '{user_input_value}' is not a number")
+			print(f"{COL_YELLOW_RED} {texts['error_not_number']} {COL_STANDARD}")
+			continue
+
+		# float() also accepts nan and inf, they are not numbers that can be calculated with
+		if not math.isfinite(number):
+			logging.error(f"ask_number: '{user_input_value}' is not a finite number")
 			print(f"{COL_YELLOW_RED} {texts['error_not_number']} {COL_STANDARD}")
 			continue
 
@@ -210,5 +217,6 @@ if __name__ == "__main__":
 # 1.9 2026-10-14 choose language at start: Swedish, English or Czech
 # 1.10 2026-10-14 remember the language until next time in dft_lang.txt
 # 1.11 2026-10-14 saved language is used directly, 4 in the menu changes language
+# 1.12 2026-10-14 nan and inf are not accepted as numbers
 
 # ** END SCRIPT ************************************************
