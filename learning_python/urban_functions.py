@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban_functions.py
-# Version   : 1.12
+# Version   : 1.13
 # Purpose   : functions in external file
 # Linked to : urban.py
 #
@@ -13,7 +13,10 @@
 # ** Imports ***************************************************
 import logging
 import sys
-from terminal_colors import COL_YELLOW_RED, COL_GREEN, COL_STANDARD
+from os import path
+# the root directory of the repo, so that common/ can be found
+sys.path.insert(0, path.join(path.dirname(path.abspath(__file__)), '..'))
+from common.terminal_colors import COL_YELLOW_RED, COL_GREEN, COL_STANDARD
 
 # ** Variables *************************************************
 
@@ -68,5 +71,6 @@ def result(factor, table):
 # 1.10 2026-10-13 renamed from urban_classes.py
 # 1.11 2026-10-14 wrong answer and wrong input in yellow on red
 # 1.12 2026-10-14 right answer in green
+# 1.13 2026-10-14 terminal_colors from common/
 
 # ** END SCRIPT ************************************************

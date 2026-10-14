@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : terminal_colors.py
-# Version   : 1.3
-# Purpose   : colors in the terminal, standalone, can be copied to other projects
+# Version   : 1.4
+# Purpose   : colors in the terminal, standalone, shared by the programs in the repo
 # Linked to :
 #
 # Created by: Urban Björkén
@@ -40,5 +40,6 @@ if __name__ == "__main__":
 # 1.1 2026-10-14 descriptive color names
 # 1.2 2026-10-14 constants in upper case
 # 1.3 2026-10-14 COL_GREEN
+# 1.4 2026-10-14 moved to common/, shared by all programs
 
 # ** END SCRIPT ************************************************

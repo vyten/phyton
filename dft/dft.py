@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.12
+# Version   : 1.13
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -14,12 +14,15 @@
 import subprocess
 import logging
 import math
+import sys
 from os import path
+# the root directory of the repo, so that common/ can be found
+sys.path.insert(0, path.join(path.dirname(path.abspath(__file__)), '..'))
 import dft_functions
 import lang_se
 import lang_en
 import lang_cz
-from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_GREEN, COL_STANDARD
+from common.terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_GREEN, COL_STANDARD
 
 # ** Variables *************************************************
 LOG_FILE_NAME = 'dft.log'
@@ -218,5 +221,6 @@ if __name__ == "__main__":
 # 1.10 2026-10-14 remember the language until next time in dft_lang.txt
 # 1.11 2026-10-14 saved language is used directly, 4 in the menu changes language
 # 1.12 2026-10-14 nan and inf are not accepted as numbers
+# 1.13 2026-10-14 terminal_colors from common/
 
 # ** END SCRIPT ************************************************

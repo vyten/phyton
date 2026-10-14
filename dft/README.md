@@ -31,10 +31,11 @@ Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ä
 |---|---|
 | `dft.py` | Huvudskriptet: meny, inmatning och utskrift |
 | `dft_functions.py` | Uträkningarna: `calculate_distance()`, `calculate_speed()`, `calculate_time()` och hjälpfunktionerna `to_minutes()` och `to_hours_and_minutes()` |
-| `terminal_colors.py` | Färger i terminalen, kopia av `learning_python/terminal_colors.py` |
 | `lang_se.py` | Svenska texter |
 | `lang_en.py` | Engelska texter |
 | `lang_cz.py` | Tjeckiska texter (rader märkta TODO är fortfarande på svenska) |
+
+Färgerna hämtas från [`common/terminal_colors.py`](../common/README.md).
 
 Kör `python3 dft_functions.py` för att testa uträkningarna. Den skriver `All tests OK`, eller stoppar med `AssertionError` och visar vilket svar som är fel.
 
@@ -63,5 +64,4 @@ Synpunkter från en kodgranskning av programmet.
 
 ### Att förbättra
 
-- **`terminal_colors.py` finns i två kopior**, här och i `learning_python/`. Ändras den ena måste den andra ändras för hand.
 - **Nio rader i `lang_cz.py` är fortfarande på svenska** och väntar på översättning.

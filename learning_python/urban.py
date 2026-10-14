@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.18
+# Version   : 1.19
 # Purpose   : learning python
 # Linked to : urban_functions.py
 #
@@ -15,8 +15,10 @@ from os import path
 import subprocess
 import sys
 import logging
+# the root directory of the repo, so that common/ can be found
+sys.path.insert(0, path.join(path.dirname(path.abspath(__file__)), '..'))
 import urban_functions
-from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_STANDARD
+from common.terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_STANDARD
 
 # ** Variables *************************************************
 LOG_FILE_NAME = 'PythonLogException.log'
@@ -100,5 +102,6 @@ if __name__ == "__main__":
 # 1.16 2026-10-14 descriptive color names
 # 1.17 2026-10-14 constants in upper case
 # 1.18 2026-10-14 wrong input in yellow on red
+# 1.19 2026-10-14 terminal_colors from common/
 
 # ** END SCRIPT ************************************************

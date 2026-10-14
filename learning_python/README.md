@@ -19,7 +19,8 @@ Felaktig inmatning loggas till `PythonLogException.log` i samma katalog som skri
 |---|---|
 | `urban.py` | Huvudskriptet: välkomsttext, inmatning, frågeloop och resultat |
 | `urban_functions.py` | Funktionerna `check_integer()` och `result()`: kontroll av heltal och rättning |
-| `terminal_colors.py` | Färger i terminalen (fristående, kan kopieras till andra projekt) |
+
+Färgerna hämtas från [`common/terminal_colors.py`](../common/README.md).
 
 ## Utvärdering
 
