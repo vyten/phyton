@@ -23,7 +23,7 @@ python3 dft.py
 
 Välj 1 = Distans, 2 = Fart, 3 = Tid eller 0 = Avsluta. Decimaltal kan skrivas med punkt eller komma, till exempel `5.5` eller `5,5`. Ctrl+C avslutar också.
 
-Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ändras i variabeln `log_file_name` i `dft.py`.
+Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ändras i konstanten `LOG_FILE_NAME` i `dft.py`.
 
 ## Filer
 

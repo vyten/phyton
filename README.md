@@ -11,7 +11,7 @@ cd learning_python
 python3 urban.py
 ```
 
-Felaktig inmatning loggas till `PythonLogException.log` i samma katalog som skriptet. Namnet ändras i variabeln `log_file_name` i `urban.py`.
+Felaktig inmatning loggas till `PythonLogException.log` i samma katalog som skriptet. Namnet ändras i konstanten `LOG_FILE_NAME` i `urban.py`.
 
 ## Filer
 

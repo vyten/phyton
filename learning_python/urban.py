@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.16
+# Version   : 1.17
 # Purpose   : learning python
 # Linked to : urban_functions.py
 #
@@ -16,11 +16,11 @@ import subprocess
 import sys
 import logging
 import urban_functions
-from terminal_colors import col_yellow_blue, col_standard
+from terminal_colors import COL_YELLOW_BLUE, COL_STANDARD
 
 # ** Variables *************************************************
-log_file_name = 'PythonLogException.log'
-log_file = path.join(path.dirname(path.abspath(__file__)), log_file_name)
+LOG_FILE_NAME = 'PythonLogException.log'
+LOG_FILE = path.join(path.dirname(path.abspath(__file__)), LOG_FILE_NAME)
 
 # ** Functions *************************************************
 # main() - the flow of the script
@@ -32,7 +32,7 @@ def main():
 	subprocess.run(['clear'])
 
 	# logging
-	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=log_file,level=logging.ERROR)
+	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=LOG_FILE,level=logging.ERROR)
 
 	# welcome, yellow on blue, all lines padded to the same width
 	welcome_lines = [
@@ -48,7 +48,7 @@ def main():
 	width = max(len(line) for line in welcome_lines)
 	print()
 	for line in welcome_lines:
-		print(f"{col_yellow_blue}  {line.ljust(width)}  {col_standard}")
+		print(f"{COL_YELLOW_BLUE}  {line.ljust(width)}  {COL_STANDARD}")
 	print()
 
 	# enduser input
@@ -98,5 +98,6 @@ if __name__ == "__main__":
 # 1.14 2026-10-13 subprocess.run() instead of os.system()
 # 1.15 2026-10-14 welcome text yellow on blue (terminal_colors.py)
 # 1.16 2026-10-14 descriptive color names
+# 1.17 2026-10-14 constants in upper case
 
 # ** END SCRIPT ************************************************

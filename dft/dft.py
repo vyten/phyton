@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.4
+# Version   : 1.5
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -17,8 +17,8 @@ from os import path
 import dft_functions
 
 # ** Variables *************************************************
-log_file_name = 'dft.log'
-log_file = path.join(path.dirname(path.abspath(__file__)), log_file_name)
+LOG_FILE_NAME = 'dft.log'
+LOG_FILE = path.join(path.dirname(path.abspath(__file__)), LOG_FILE_NAME)
 
 # ** Functions *************************************************
 # ask_number() - asks until the user writes a number that is 0 or more, accepts both 2.5 and 2,5
@@ -53,7 +53,7 @@ def main():
 	subprocess.run(['clear'])
 
 	# logging
-	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=log_file, level=logging.ERROR)
+	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=LOG_FILE, level=logging.ERROR)
 
 	print("\nD F T - Distans Fart Tid")
 
@@ -111,5 +111,6 @@ if __name__ == "__main__":
 # 1.2 2026-10-13 clear screen at start
 # 1.3 2026-10-13 subprocess.run() instead of os.system()
 # 1.4 2026-10-13 logging to dft.log, Ctrl+C and Ctrl+D end the script quietly
+# 1.5 2026-10-14 constants in upper case
 
 # ** END SCRIPT ************************************************
