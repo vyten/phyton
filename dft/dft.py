@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.8
+# Version   : 1.9
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -16,11 +16,20 @@ import logging
 from os import path
 import dft_functions
 import lang_se
+import lang_en
+import lang_cz
 from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_GREEN, COL_STANDARD
 
 # ** Variables *************************************************
 LOG_FILE_NAME = 'dft.log'
 LOG_FILE = path.join(path.dirname(path.abspath(__file__)), LOG_FILE_NAME)
+
+# the languages to choose from, the number is the choice in the menu
+LANGUAGES = {
+	'1': lang_se.TEXTS,
+	'2': lang_en.TEXTS,
+	'3': lang_cz.TEXTS,
+}
 
 # ** Functions *************************************************
 # ask_number() - asks until the user writes a number that is 0 or more, accepts both 2.5 and 2,5
@@ -49,16 +58,30 @@ def ask_time(texts):
 	return hours, minutes
 
 
-# main() - the flow of the script
-def main():
-	# texts in the chosen language
-	texts = lang_se.TEXTS
-
+# choose_language() - asks until the user chooses a language, returns the texts for it
+def choose_language():
 	# clear linux screen
 	subprocess.run(['clear'])
 
-	# logging
-	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=LOG_FILE, level=logging.ERROR)
+	print()
+	print(f"{COL_YELLOW_BLUE}   D F T   {COL_STANDARD}")
+	print()
+	for number, texts in LANGUAGES.items():
+		print(f"  {number} = {texts['language']}")
+
+	while True:
+		choice = input("> ")
+		if choice in LANGUAGES:
+			return LANGUAGES[choice]
+
+		logging.error(f"choose_language: '{choice}' is not a language")
+		print(f"{COL_YELLOW_RED} {' / '.join(LANGUAGES)} {COL_STANDARD}")
+
+
+# main() - the flow of the script, texts in the chosen language
+def main(texts):
+	# clear linux screen
+	subprocess.run(['clear'])
 
 	print()
 	print(f"{COL_YELLOW_BLUE}   {texts['title']}   {COL_STANDARD}")
@@ -110,11 +133,17 @@ def main():
 # run main() only when the script is started, not when it is imported
 # Ctrl+C or Ctrl+D ends the script quietly instead of showing a Python error
 if __name__ == "__main__":
+	# logging
+	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=LOG_FILE, level=logging.ERROR)
+
+	# Swedish until a language is chosen, used if Ctrl+C comes before that
+	texts = lang_se.TEXTS
 	try:
-		main()
+		texts = choose_language()
+		main(texts)
 	except (KeyboardInterrupt, EOFError):
 		print()
-		print(lang_se.TEXTS['goodbye'])
+		print(texts['goodbye'])
 
 # ** History ***************************************************
 # 1.0 2026-10-13 Initial version
@@ -126,5 +155,6 @@ if __name__ == "__main__":
 # 1.6 2026-10-14 colors (terminal_colors.py)
 # 1.7 2026-10-14 answers in green
 # 1.8 2026-10-14 texts from lang_se.py
+# 1.9 2026-10-14 choose language at start: Swedish, English or Czech
 
 # ** END SCRIPT ************************************************
