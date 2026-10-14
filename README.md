@@ -9,5 +9,4 @@ Diverse Python-program skapade i utbildningssyfte.
 
 ## Övrigt
 
-- [common](common/README.md): kod som delas av flera program, till exempel färger i terminalen.
-- `template.py`: mall för header och sektioner i nya skript.
+- [common](common/README.md): kod som delas av flera program, till exempel färger i terminalen, och mallen för nya skript.

@@ -1,12 +1,13 @@
 # common
 
-Kod som delas av flera program i repot. Filerna är fristående och kan också kopieras till andra projekt.
+Kod som delas av flera program i repot, och mallen för nya skript. Filerna är fristående och kan också kopieras till andra projekt.
 
 ## Filer
 
 | Fil | Innehåll | Används av |
 |---|---|---|
 | `terminal_colors.py` | Färger i terminalen, samma koder som i bash | `learning_python/urban.py`, `learning_python/urban_functions.py`, `dft/dft.py` |
+| `template.py` | Mall för header och sektioner i nya skript, kopieras när ett nytt skript skapas | – |
 | `__init__.py` | Tom fil som talar om för Python att katalogen är ett paket | – |
 
 Kör `python3 terminal_colors.py` för att se alla färger.
