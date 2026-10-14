@@ -10,7 +10,7 @@ Tiden räknas i minuter, därav 60.
 
 | Räkna ut | Formel | Enhet |
 |---|---|---|
-| Distans | (Fart × Tid) / 60 | M (distansminuter) |
+| Distans | (Fart × Tid) / 60 | nm (distansminuter) |
 | Fart | (Distans / Tid) × 60 | knop |
 | Tid | (Distans / Fart) × 60 | h och minuter |
 
@@ -64,5 +64,4 @@ Synpunkter från en kodgranskning av programmet.
 ### Att förbättra
 
 - **`terminal_colors.py` finns i två kopior**, här och i `learning_python/`. Ändras den ena måste den andra ändras för hand.
-- **Distansenheten skiljer sig mellan språken:** `M` på svenska och `nm` på engelska och tjeckiska.
 - **Nio rader i `lang_cz.py` är fortfarande på svenska** och väntar på översättning.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft_functions.py
-# Version   : 1.4
+# Version   : 1.5
 # Purpose   : functions for calculating distance, speed and time
 # Linked to : dft.py
 #
@@ -22,14 +22,14 @@ def to_minutes(hours, minutes):
 	return hours * 60 + minutes
 
 
-# calculate_distance() - returns the distance in nautical miles (M)
+# calculate_distance() - returns the distance in nautical miles (nm)
 # speed in knots, time in hours and minutes
 def calculate_distance(speed, hours, minutes):
 	return speed * to_minutes(hours, minutes) / 60
 
 
 # calculate_speed() - returns the speed in knots
-# distance in nautical miles (M), time in hours and minutes
+# distance in nautical miles (nm), time in hours and minutes
 def calculate_speed(distance, hours, minutes):
 	return distance / to_minutes(hours, minutes) * 60
 
@@ -41,7 +41,7 @@ def to_hours_and_minutes(total_minutes):
 
 
 # calculate_time() - returns the time in hours and minutes
-# distance in nautical miles (M), speed in knots
+# distance in nautical miles (nm), speed in knots
 def calculate_time(distance, speed):
 	return to_hours_and_minutes(distance / speed * 60)
 
@@ -74,5 +74,6 @@ if __name__ == "__main__":
 # 1.2 2026-10-13 calculate_speed(), to_minutes()
 # 1.3 2026-10-13 calculate_time(), to_hours_and_minutes()
 # 1.4 2026-10-14 tests with assert instead of printing
+# 1.5 2026-10-14 nm instead of M in the comments
 
 # ** END SCRIPT ************************************************

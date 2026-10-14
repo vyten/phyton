@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : lang_se.py
-# Version   : 1.1
+# Version   : 1.2
 # Purpose   : Swedish texts for dft.py
 # Linked to : dft.py
 #
@@ -29,13 +29,13 @@ TEXTS = {
 	'goodbye': 'Hej då!',
 
 	# questions
-	'ask_distance': 'Distans, M: ',
+	'ask_distance': 'Distans, nm: ',
 	'ask_speed': 'Fart, knop: ',
 	'ask_hours': 'Tid, timmar: ',
 	'ask_minutes': 'Tid, minuter: ',
 
 	# answers
-	'result_distance': 'Distansen är: {distance:.1f} M',
+	'result_distance': 'Distansen är: {distance:.1f} nm',
 	'result_speed': 'Farten är: {speed:.1f} knop',
 	'result_time': 'Tiden är: {hours} h {minutes} min',
 
@@ -59,5 +59,6 @@ if __name__ == "__main__":
 # ** History ***************************************************
 # 1.0 2026-10-14 Initial version
 # 1.1 2026-10-14 change_language, 4 in error_menu
+# 1.2 2026-10-14 nm instead of M, same as English and Czech
 
 # ** END SCRIPT ************************************************
