@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : lang_en.py
-# Version   : 1.0
+# Version   : 1.1
 # Purpose   : English texts for dft.py
 # Linked to : dft.py
 #
@@ -24,6 +24,7 @@ TEXTS = {
 	'speed': 'Speed',
 	'time': 'Time',
 	'quit': 'Quit',
+	'change_language': 'Change language',
 	'choice': 'Choice: ',
 	'goodbye': 'Goodbye!',
 
@@ -43,7 +44,7 @@ TEXTS = {
 	'error_negative': 'The number must not be negative, try again',
 	'error_time_zero': 'The time must not be 0',
 	'error_speed_zero': 'The speed must not be 0',
-	'error_menu': 'Choose 1, 2, 3 or 0',
+	'error_menu': 'Choose 1, 2, 3, 4 or 0',
 }
 
 # ** Functions *************************************************
@@ -57,5 +58,6 @@ if __name__ == "__main__":
 
 # ** History ***************************************************
 # 1.0 2026-10-14 Initial version
+# 1.1 2026-10-14 change_language, 4 in error_menu
 
 # ** END SCRIPT ************************************************

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.10
+# Version   : 1.11
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -62,22 +62,22 @@ def ask_time(texts):
 	return hours, minutes
 
 
-# load_language() - returns the saved language number, or '1' (Swedish) if none is saved
+# load_language() - returns the saved language number, or None if no language is saved
 def load_language():
 	try:
 		with open(LANG_FILE) as lang_file:
 			choice = lang_file.read().strip()
 	except FileNotFoundError:
-		return '1'
+		return None
 	except OSError as error:
 		logging.error(f"load_language: {error}")
-		return '1'
+		return None
 
 	if choice in LANGUAGES:
 		return choice
 
 	logging.error(f"load_language: '{choice}' in {LANG_FILE_NAME} is not a language")
-	return '1'
+	return None
 
 
 # save_language() - saves the language number until next time
@@ -89,13 +89,11 @@ def save_language(choice):
 		logging.error(f"save_language: {error}")
 
 
-# choose_language() - asks until the user chooses a language, returns the texts for it
-# Enter alone keeps the language from last time
-def choose_language():
+# choose_language() - asks until the user chooses a language, saves it and returns the texts for it
+# current_choice is shown as [2], Enter alone keeps it, None when no language is chosen yet
+def choose_language(current_choice):
 	# clear linux screen
 	subprocess.run(['clear'])
-
-	saved_choice = load_language()
 
 	print()
 	print(f"{COL_YELLOW_BLUE}   D F T   {COL_STANDARD}")
@@ -103,84 +101,101 @@ def choose_language():
 	for number, texts in LANGUAGES.items():
 		print(f"  {number} = {texts['language']}")
 
+	prompt = f"[{current_choice}] > " if current_choice else "> "
 	while True:
-		choice = input(f"[{saved_choice}] > ")
-		if choice == "":
-			choice = saved_choice
+		choice = input(prompt)
+		if choice == "" and current_choice:
+			choice = current_choice
 		if choice in LANGUAGES:
 			save_language(choice)
-			return LANGUAGES[choice]
+			return choice
 
 		logging.error(f"choose_language: '{choice}' is not a language")
 		print(f"{COL_YELLOW_RED} {' / '.join(LANGUAGES)} {COL_STANDARD}")
 
 
-# main() - the flow of the script, texts in the chosen language
-def main(texts):
+# show_title() - clears the screen and shows the title in the chosen language
+def show_title(texts):
 	# clear linux screen
 	subprocess.run(['clear'])
 
 	print()
 	print(f"{COL_YELLOW_BLUE}   {texts['title']}   {COL_STANDARD}")
 
-	while True:
+
+# main() - the flow of the script
+# the language from last time is used directly, the language menu is shown only the first time
+# Ctrl+C or Ctrl+D ends the script quietly instead of showing a Python error
+def main():
+	# Swedish until a language is chosen, used if Ctrl+C comes before that
+	texts = lang_se.TEXTS
+	try:
+		language_choice = load_language()
+		if language_choice is None:
+			language_choice = choose_language(None)
+		texts = LANGUAGES[language_choice]
+		show_title(texts)
+
+		while True:
+			print()
+			print(texts['menu_question'])
+			print(f"  1 = {texts['distance']}")
+			print(f"  2 = {texts['speed']}")
+			print(f"  3 = {texts['time']}")
+			print(f"  4 = {texts['change_language']}")
+			print(f"  0 = {texts['quit']}")
+			choice = input(texts['choice'])
+
+			if choice == "1":
+				speed = ask_number(texts['ask_speed'], texts)
+				hours, minutes = ask_time(texts)
+				distance = dft_functions.calculate_distance(speed, hours, minutes)
+				print(f"{COL_GREEN}{texts['result_distance'].format(distance=distance)}{COL_STANDARD}")
+
+			elif choice == "2":
+				distance = ask_number(texts['ask_distance'], texts)
+				hours, minutes = ask_time(texts)
+				if dft_functions.to_minutes(hours, minutes) == 0:
+					logging.error("main: speed asked with time 0")
+					print(f"{COL_YELLOW_RED} {texts['error_time_zero']} {COL_STANDARD}")
+					continue
+				speed = dft_functions.calculate_speed(distance, hours, minutes)
+				print(f"{COL_GREEN}{texts['result_speed'].format(speed=speed)}{COL_STANDARD}")
+
+			elif choice == "3":
+				distance = ask_number(texts['ask_distance'], texts)
+				speed = ask_number(texts['ask_speed'], texts)
+				if speed == 0:
+					logging.error("main: time asked with speed 0")
+					print(f"{COL_YELLOW_RED} {texts['error_speed_zero']} {COL_STANDARD}")
+					continue
+				hours, minutes = dft_functions.calculate_time(distance, speed)
+				print(f"{COL_GREEN}{texts['result_time'].format(hours=hours, minutes=minutes)}{COL_STANDARD}")
+
+			elif choice == "4":
+				language_choice = choose_language(language_choice)
+				texts = LANGUAGES[language_choice]
+				show_title(texts)
+
+			elif choice == "0":
+				print(texts['goodbye'])
+				break
+
+			else:
+				print(f"{COL_YELLOW_RED} {texts['error_menu']} {COL_STANDARD}")
+
+	except (KeyboardInterrupt, EOFError):
 		print()
-		print(texts['menu_question'])
-		print(f"  1 = {texts['distance']}")
-		print(f"  2 = {texts['speed']}")
-		print(f"  3 = {texts['time']}")
-		print(f"  0 = {texts['quit']}")
-		choice = input(texts['choice'])
-
-		if choice == "1":
-			speed = ask_number(texts['ask_speed'], texts)
-			hours, minutes = ask_time(texts)
-			distance = dft_functions.calculate_distance(speed, hours, minutes)
-			print(f"{COL_GREEN}{texts['result_distance'].format(distance=distance)}{COL_STANDARD}")
-
-		elif choice == "2":
-			distance = ask_number(texts['ask_distance'], texts)
-			hours, minutes = ask_time(texts)
-			if dft_functions.to_minutes(hours, minutes) == 0:
-				logging.error("main: speed asked with time 0")
-				print(f"{COL_YELLOW_RED} {texts['error_time_zero']} {COL_STANDARD}")
-				continue
-			speed = dft_functions.calculate_speed(distance, hours, minutes)
-			print(f"{COL_GREEN}{texts['result_speed'].format(speed=speed)}{COL_STANDARD}")
-
-		elif choice == "3":
-			distance = ask_number(texts['ask_distance'], texts)
-			speed = ask_number(texts['ask_speed'], texts)
-			if speed == 0:
-				logging.error("main: time asked with speed 0")
-				print(f"{COL_YELLOW_RED} {texts['error_speed_zero']} {COL_STANDARD}")
-				continue
-			hours, minutes = dft_functions.calculate_time(distance, speed)
-			print(f"{COL_GREEN}{texts['result_time'].format(hours=hours, minutes=minutes)}{COL_STANDARD}")
-
-		elif choice == "0":
-			print(texts['goodbye'])
-			break
-
-		else:
-			print(f"{COL_YELLOW_RED} {texts['error_menu']} {COL_STANDARD}")
+		print(texts['goodbye'])
 
 
 # ** Main ******************************************************
 # run main() only when the script is started, not when it is imported
-# Ctrl+C or Ctrl+D ends the script quietly instead of showing a Python error
 if __name__ == "__main__":
 	# logging
 	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=LOG_FILE, level=logging.ERROR)
 
-	# Swedish until a language is chosen, used if Ctrl+C comes before that
-	texts = lang_se.TEXTS
-	try:
-		texts = choose_language()
-		main(texts)
-	except (KeyboardInterrupt, EOFError):
-		print()
-		print(texts['goodbye'])
+	main()
 
 # ** History ***************************************************
 # 1.0 2026-10-13 Initial version
@@ -194,5 +209,6 @@ if __name__ == "__main__":
 # 1.8 2026-10-14 texts from lang_se.py
 # 1.9 2026-10-14 choose language at start: Swedish, English or Czech
 # 1.10 2026-10-14 remember the language until next time in dft_lang.txt
+# 1.11 2026-10-14 saved language is used directly, 4 in the menu changes language
 
 # ** END SCRIPT ************************************************

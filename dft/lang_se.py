@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : lang_se.py
-# Version   : 1.0
+# Version   : 1.1
 # Purpose   : Swedish texts for dft.py
 # Linked to : dft.py
 #
@@ -24,6 +24,7 @@ TEXTS = {
 	'speed': 'Fart',
 	'time': 'Tid',
 	'quit': 'Avsluta',
+	'change_language': 'Byt språk',
 	'choice': 'Val: ',
 	'goodbye': 'Hej då!',
 
@@ -43,7 +44,7 @@ TEXTS = {
 	'error_negative': 'Talet får inte vara negativt, försök igen',
 	'error_time_zero': 'Tiden får inte vara 0',
 	'error_speed_zero': 'Farten får inte vara 0',
-	'error_menu': 'Välj 1, 2, 3 eller 0',
+	'error_menu': 'Välj 1, 2, 3, 4 eller 0',
 }
 
 # ** Functions *************************************************
@@ -57,5 +58,6 @@ if __name__ == "__main__":
 
 # ** History ***************************************************
 # 1.0 2026-10-14 Initial version
+# 1.1 2026-10-14 change_language, 4 in error_menu
 
 # ** END SCRIPT ************************************************
