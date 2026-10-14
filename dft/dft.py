@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.6
+# Version   : 1.7
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -15,7 +15,7 @@ import subprocess
 import logging
 from os import path
 import dft_functions
-from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_YELLOW, COL_STANDARD
+from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_GREEN, COL_STANDARD
 
 # ** Variables *************************************************
 LOG_FILE_NAME = 'dft.log'
@@ -68,7 +68,7 @@ def main():
 			speed = ask_number("Fart, knop: ")
 			hours, minutes = ask_time()
 			distance = dft_functions.calculate_distance(speed, hours, minutes)
-			print(f"{COL_YELLOW}Distansen är: {distance:.1f} M{COL_STANDARD}")
+			print(f"{COL_GREEN}Distansen är: {distance:.1f} M{COL_STANDARD}")
 
 		elif choice == "2":
 			distance = ask_number("Distans, M: ")
@@ -78,7 +78,7 @@ def main():
 				print(f"{COL_YELLOW_RED} Tiden får inte vara 0 {COL_STANDARD}")
 				continue
 			speed = dft_functions.calculate_speed(distance, hours, minutes)
-			print(f"{COL_YELLOW}Farten är: {speed:.1f} knop{COL_STANDARD}")
+			print(f"{COL_GREEN}Farten är: {speed:.1f} knop{COL_STANDARD}")
 
 		elif choice == "3":
 			distance = ask_number("Distans, M: ")
@@ -88,7 +88,7 @@ def main():
 				print(f"{COL_YELLOW_RED} Farten får inte vara 0 {COL_STANDARD}")
 				continue
 			hours, minutes = dft_functions.calculate_time(distance, speed)
-			print(f"{COL_YELLOW}Tiden är: {hours} h {minutes} min{COL_STANDARD}")
+			print(f"{COL_GREEN}Tiden är: {hours} h {minutes} min{COL_STANDARD}")
 
 		elif choice == "0":
 			print("Hej då!")
@@ -115,5 +115,6 @@ if __name__ == "__main__":
 # 1.4 2026-10-13 logging to dft.log, Ctrl+C and Ctrl+D end the script quietly
 # 1.5 2026-10-14 constants in upper case
 # 1.6 2026-10-14 colors (terminal_colors.py)
+# 1.7 2026-10-14 answers in green
 
 # ** END SCRIPT ************************************************
