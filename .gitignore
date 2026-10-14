@@ -3,3 +3,4 @@ __pycache__/
 *.log
 todo.txt
 tma/
+dft/dft_lang.txt

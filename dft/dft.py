@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft.py
-# Version   : 1.9
+# Version   : 1.10
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid)
 # Linked to : dft_functions.py
 #
@@ -23,6 +23,10 @@ from terminal_colors import COL_YELLOW_BLUE, COL_YELLOW_RED, COL_GREEN, COL_STAN
 # ** Variables *************************************************
 LOG_FILE_NAME = 'dft.log'
 LOG_FILE = path.join(path.dirname(path.abspath(__file__)), LOG_FILE_NAME)
+
+# the chosen language is saved here until next time, like the cookie in the PHP version
+LANG_FILE_NAME = 'dft_lang.txt'
+LANG_FILE = path.join(path.dirname(path.abspath(__file__)), LANG_FILE_NAME)
 
 # the languages to choose from, the number is the choice in the menu
 LANGUAGES = {
@@ -58,10 +62,40 @@ def ask_time(texts):
 	return hours, minutes
 
 
+# load_language() - returns the saved language number, or '1' (Swedish) if none is saved
+def load_language():
+	try:
+		with open(LANG_FILE) as lang_file:
+			choice = lang_file.read().strip()
+	except FileNotFoundError:
+		return '1'
+	except OSError as error:
+		logging.error(f"load_language: {error}")
+		return '1'
+
+	if choice in LANGUAGES:
+		return choice
+
+	logging.error(f"load_language: '{choice}' in {LANG_FILE_NAME} is not a language")
+	return '1'
+
+
+# save_language() - saves the language number until next time
+def save_language(choice):
+	try:
+		with open(LANG_FILE, 'w') as lang_file:
+			lang_file.write(choice)
+	except OSError as error:
+		logging.error(f"save_language: {error}")
+
+
 # choose_language() - asks until the user chooses a language, returns the texts for it
+# Enter alone keeps the language from last time
 def choose_language():
 	# clear linux screen
 	subprocess.run(['clear'])
+
+	saved_choice = load_language()
 
 	print()
 	print(f"{COL_YELLOW_BLUE}   D F T   {COL_STANDARD}")
@@ -70,8 +104,11 @@ def choose_language():
 		print(f"  {number} = {texts['language']}")
 
 	while True:
-		choice = input("> ")
+		choice = input(f"[{saved_choice}] > ")
+		if choice == "":
+			choice = saved_choice
 		if choice in LANGUAGES:
+			save_language(choice)
 			return LANGUAGES[choice]
 
 		logging.error(f"choose_language: '{choice}' is not a language")
@@ -156,5 +193,6 @@ if __name__ == "__main__":
 # 1.7 2026-10-14 answers in green
 # 1.8 2026-10-14 texts from lang_se.py
 # 1.9 2026-10-14 choose language at start: Swedish, English or Czech
+# 1.10 2026-10-14 remember the language until next time in dft_lang.txt
 
 # ** END SCRIPT ************************************************
