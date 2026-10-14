@@ -30,6 +30,7 @@ Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ä
 | Fil | Innehåll |
 |---|---|
 | `dft.py` | Huvudskriptet: meny, inmatning och utskrift |
+| `dft_gui.py` | Samma program i ett fönster (tkinter), under arbete |
 | `dft_functions.py` | Uträkningarna: `calculate_distance()`, `calculate_speed()`, `calculate_time()` och hjälpfunktionerna `to_minutes()` och `to_hours_and_minutes()` |
 | `lang_se.py` | Svenska texter |
 | `lang_en.py` | Engelska texter |
