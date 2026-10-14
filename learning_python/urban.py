@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.14
+# Version   : 1.15
 # Purpose   : learning python
 # Linked to : urban_functions.py
 #
@@ -16,6 +16,7 @@ import subprocess
 import sys
 import logging
 import urban_functions
+from terminal_colors import COL_YB, COL_STD
 
 # ** Variables *************************************************
 log_file_name = 'PythonLogException.log'
@@ -33,10 +34,22 @@ def main():
 	# logging
 	logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', filename=log_file,level=logging.ERROR)
 
-	# welcome
-	print("\nHej och Välkommen!")
-	print("Här kan du öva på multiplikationstabellen. Du kommer att få göra följande val:")
-	print("  * Vilken tabell (ex: 3)\n  * startposition (ex: 3)\n  * slutposition  (ex: 9)\n")
+	# welcome, yellow on blue, all lines padded to the same width
+	welcome_lines = [
+		"",
+		"Hej och Välkommen!",
+		"",
+		"Här kan du öva på multiplikationstabellen. Du kommer att få göra följande val:",
+		"  * Vilken tabell (ex: 3)",
+		"  * startposition (ex: 3)",
+		"  * slutposition  (ex: 9)",
+		"",
+	]
+	width = max(len(line) for line in welcome_lines)
+	print()
+	for line in welcome_lines:
+		print(f"{COL_YB}  {line.ljust(width)}  {COL_STD}")
+	print()
 
 	# enduser input
 	selected_table = urban_functions.check_integer(input('Skriv in tabell: '), exit_on_error=True)
@@ -83,5 +96,6 @@ if __name__ == "__main__":
 # 1.12 2026-10-13 calls functions directly, class Calculate removed
 # 1.13 2026-10-13 urban_classes.py renamed to urban_functions.py
 # 1.14 2026-10-13 subprocess.run() instead of os.system()
+# 1.15 2026-10-14 welcome text yellow on blue (terminal_colors.py)
 
 # ** END SCRIPT ************************************************
