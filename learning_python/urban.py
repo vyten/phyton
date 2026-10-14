@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban.py
-# Version   : 1.15
+# Version   : 1.16
 # Purpose   : learning python
 # Linked to : urban_functions.py
 #
@@ -16,7 +16,7 @@ import subprocess
 import sys
 import logging
 import urban_functions
-from terminal_colors import COL_YB, COL_STD
+from terminal_colors import col_yellow_blue, col_standard
 
 # ** Variables *************************************************
 log_file_name = 'PythonLogException.log'
@@ -48,7 +48,7 @@ def main():
 	width = max(len(line) for line in welcome_lines)
 	print()
 	for line in welcome_lines:
-		print(f"{COL_YB}  {line.ljust(width)}  {COL_STD}")
+		print(f"{col_yellow_blue}  {line.ljust(width)}  {col_standard}")
 	print()
 
 	# enduser input
@@ -97,5 +97,6 @@ if __name__ == "__main__":
 # 1.13 2026-10-13 urban_classes.py renamed to urban_functions.py
 # 1.14 2026-10-13 subprocess.run() instead of os.system()
 # 1.15 2026-10-14 welcome text yellow on blue (terminal_colors.py)
+# 1.16 2026-10-14 descriptive color names
 
 # ** END SCRIPT ************************************************
