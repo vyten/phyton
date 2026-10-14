@@ -37,3 +37,33 @@ Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ä
 | `lang_cz.py` | Tjeckiska texter (rader märkta TODO är fortfarande på svenska) |
 
 Kör `python3 dft_functions.py` för att se några provuträkningar.
+
+## Utvärdering
+
+Synpunkter från en kodgranskning av programmet.
+
+### Övergripande
+
+- **Uträkningarna är skilda från användargränssnittet.** `dft_functions.py` räknar bara och skriver aldrig ut något, och `dft.py` sköter frågor och svar. Därför kan ett GUI senare använda samma funktioner utan ändringar.
+- **Funktionerna är små och gör en sak var.** `to_minutes()` och `to_hours_and_minutes()` används av de andra i stället för att samma uträkning upprepas.
+- **Felet med 60 minuter från C#-versionen är borta.** `divmod(round(...), 60)` ger alltid minuter mellan 0 och 59.
+
+### dft.py
+
+- **Inmatningen tål både punkt och komma** som decimaltecken, och negativa tal stoppas.
+- **Division med noll fångas** innan uträkningen, med ett eget felmeddelande för tid 0 och fart 0.
+- **Ctrl+C och Ctrl+D avslutar lugnt** med hej då på valt språk, i stället för en lång Python-felutskrift.
+- **Språken ligger i en tabell** (`LANGUAGES`). Ett nytt språk kräver bara en ny språkfil och en rad.
+- **Språket sparas** i `dft_lang.txt`, och en trasig eller saknad fil leder till språkvalet i stället för en krasch.
+
+### Språkfilerna
+
+- **Alla tre filerna har samma nycklar**, och tal formateras i själva texten (`{distance:.1f}`), så varje språk kan placera talet där det passar.
+
+### Att förbättra
+
+- **`nan` och `inf` godtas som tal.** `float()` accepterar dem, så `ask_number()` släpper igenom dem. Fart `nan` vid uträkning av tid kraschar programmet med `ValueError: cannot convert float NaN to integer`, och fart `inf` ger svaret `Distansen är: inf M`. Det går att rätta med `math.isfinite(number)` i `ask_number()`.
+- **`terminal_colors.py` finns i två kopior**, här och i `learning_python/`. Ändras den ena måste den andra ändras för hand.
+- **Provuträkningarna i `dft_functions.py` skrivs bara ut** och måste läsas av med ögonen. Med `assert` eller modulen `unittest` kontrollerar Python själv att svaren stämmer.
+- **Distansenheten skiljer sig mellan språken:** `M` på svenska och `nm` på engelska och tjeckiska.
+- **Nio rader i `lang_cz.py` är fortfarande på svenska** och väntar på översättning.
