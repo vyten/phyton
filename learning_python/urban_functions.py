@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : urban_functions.py
-# Version   : 1.11
+# Version   : 1.12
 # Purpose   : functions in external file
 # Linked to : urban.py
 #
@@ -13,7 +13,7 @@
 # ** Imports ***************************************************
 import logging
 import sys
-from terminal_colors import COL_YELLOW_RED, COL_STANDARD
+from terminal_colors import COL_YELLOW_RED, COL_GREEN, COL_STANDARD
 
 # ** Variables *************************************************
 
@@ -45,7 +45,7 @@ def result(factor, table):
 	# check that the answer is an integer
 	answer = check_integer(input('svar: '), exit_on_error=False)
 	if answer == correct_answer:
-		print("rätt\n")
+		print(f"{COL_GREEN}rätt{COL_STANDARD}\n")
 		return True
 	else:
 		print(f"{COL_YELLOW_RED} fel, rätt svar är: {correct_answer} {COL_STANDARD}\n")
@@ -67,5 +67,6 @@ def result(factor, table):
 # 1.9 2026-10-13 class Calculate replaced by functions in the module
 # 1.10 2026-10-13 renamed from urban_classes.py
 # 1.11 2026-10-14 wrong answer and wrong input in yellow on red
+# 1.12 2026-10-14 right answer in green
 
 # ** END SCRIPT ************************************************
