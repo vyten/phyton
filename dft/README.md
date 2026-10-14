@@ -33,5 +33,7 @@ Felaktig inmatning loggas till `dft.log` i samma katalog som skriptet. Namnet ä
 | `dft_functions.py` | Uträkningarna: `calculate_distance()`, `calculate_speed()`, `calculate_time()` och hjälpfunktionerna `to_minutes()` och `to_hours_and_minutes()` |
 | `terminal_colors.py` | Färger i terminalen, kopia av `learning_python/terminal_colors.py` |
 | `lang_se.py` | Svenska texter |
+| `lang_en.py` | Engelska texter |
+| `lang_cz.py` | Tjeckiska texter (rader märkta TODO är fortfarande på svenska) |
 
 Kör `python3 dft_functions.py` för att se några provuträkningar.
