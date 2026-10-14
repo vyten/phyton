@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # **************************************************************
 # File      : dft_gui.py
-# Version   : 1.2
+# Version   : 1.3
 # Purpose   : calculate distance, speed or time at sea (Distans Fart Tid) in a window
 # Linked to : dft_functions.py
 #
@@ -13,6 +13,8 @@
 # ** Imports ***************************************************
 import tkinter as tk
 from os import path
+import dft_functions
+import lang_se
 
 # ** Variables *************************************************
 WINDOW_TITLE = 'D F T - Distans Fart Tid'
@@ -39,7 +41,7 @@ FLAGS = {
 	'3': 'flag_nation_cz.png',
 }
 
-# the fields on each calculation page: (text, unit), the fields are filled in step 3
+# the fields on each calculation page: (text, unit), in the same order as calculate() reads them
 CALCULATIONS = {
 	'distance': ('Distans', [('Fart', 'knop'), ('Tid', 'h'), ('', 'min')]),
 	'speed': ('Fart', [('Distans', 'nm'), ('Tid', 'h'), ('', 'min')]),
@@ -69,6 +71,30 @@ def make_button(parent, text, color, command):
 	return tk.Button(parent, text=text, command=command, font=FONT_TEXT, width=15,
 		bg=color, fg=COL_TEXT, activebackground=COL_HOVER, activeforeground=COL_TEXT,
 		relief='flat', cursor='hand2')
+
+
+# calculate() - reads the fields, calculates and shows the answer
+# step 4 adds checks for wrong input, until then a letter or 0 gives a Python error in the terminal
+def calculate(calculation, entries, result_label):
+	texts = lang_se.TEXTS    # Swedish until the language files are used in step 6
+	values = [float(entry.get().replace(',', '.')) for entry in entries]
+
+	if calculation == 'distance':
+		speed, hours, minutes = values
+		distance = dft_functions.calculate_distance(speed, hours, minutes)
+		answer = texts['result_distance'].format(distance=distance)
+
+	elif calculation == 'speed':
+		distance, hours, minutes = values
+		speed = dft_functions.calculate_speed(distance, hours, minutes)
+		answer = texts['result_speed'].format(speed=speed)
+
+	else:
+		distance, speed = values
+		hours, minutes = dft_functions.calculate_time(distance, speed)
+		answer = texts['result_time'].format(hours=hours, minutes=minutes)
+
+	result_label.config(text=answer)
 
 
 # show_header() - the header at the top of each page
@@ -103,18 +129,25 @@ def show_calculate_page(window, calculation):
 	show_header(window, header)
 
 	# the answer is shown here, empty until something is calculated
-	tk.Label(window, text='', font=FONT_HEADER, bg=COL_BACKGROUND, fg=COL_ANSWER).pack()
+	result_label = tk.Label(window, text='', font=FONT_TEXT, bg=COL_BACKGROUND, fg=COL_ANSWER)
+	result_label.pack()
 
 	# the fields in a grid: text, field and unit on each row
 	form = tk.Frame(window, bg=COL_BACKGROUND)
 	form.pack(pady=10)
+	entries = []    # the fields are saved here so that calculate() can read them
 	for row, (text, unit) in enumerate(fields):
 		tk.Label(form, text=text, font=FONT_TEXT, bg=COL_BACKGROUND, fg=COL_TEXT).grid(row=row, column=0, sticky='e', padx=5, pady=5)
-		tk.Entry(form, width=6, font=FONT_TEXT, bg=COL_INPUT).grid(row=row, column=1, padx=5, pady=5)
+		entry = tk.Entry(form, width=6, font=FONT_TEXT, bg=COL_INPUT)
+		entry.grid(row=row, column=1, padx=5, pady=5)
+		entries.append(entry)
 		tk.Label(form, text=unit, font=FONT_TEXT, bg=COL_BACKGROUND, fg=COL_TEXT).grid(row=row, column=2, sticky='w', padx=5, pady=5)
 
-	# the button does nothing yet, command= is added in step 3
-	make_button(window, 'Beräkna', COL_CALCULATE, None).pack(pady=10)
+	# the cursor starts in the first field, like setFocus() in the PHP version
+	entries[0].focus_set()
+
+	make_button(window, 'Beräkna', COL_CALCULATE,
+		lambda: calculate(calculation, entries, result_label)).pack(pady=10)
 	make_button(window, '« Tillbaka', COL_BACK, lambda: show_start_page(window)).pack(pady=10)
 
 	# small flags to change language, they do nothing yet except show the start page again
@@ -149,5 +182,6 @@ if __name__ == "__main__":
 # 1.0 2026-10-14 Initial version, empty window
 # 1.1 2026-10-14 controls: radio buttons, input fields, button and result, no function yet
 # 1.2 2026-10-14 three pages like the PHP version: flags, start page and calculation page
+# 1.3 2026-10-14 the calculate button calculates with dft_functions.py
 
 # ** END SCRIPT ************************************************
